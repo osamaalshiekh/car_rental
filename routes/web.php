@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHomeController ;
+use App\Http\Controllers\Admin\CategoryController ;
+use App\Http\Controllers\Admin\CarController ;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +28,26 @@ Route::get('/', function () {
 
 Route::prefix( 'admin')->name('admin.')->group(function () {
     Route::get('/', [AdminHomeController::class,'index'])->name('index');
+
+
+
+//*************** admin CategoryController routes **********
+    Route::prefix( '/category')->name('category.')->controller(CategoryController::class)->group(function () {
+        Route::get('/', action:'index')->name( name: 'index');
+        Route::get('/create', action:'create')->name( name: 'create');
+        Route::Post('/store', action:'store')->name( name: 'store');
+        Route::get('/edit/{id}', action:'edit')->name( name: 'edit');
+        Route::post('/update/{id}', action:'update')->name( name: 'update');
+        Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
+        Route::get('/show/{id}', action:'show')->name( name: 'show');
+});
+    Route::prefix( '/car')->name('car.')->controller(CarController::class)->group(function () {
+        Route::get('/', action:'index')->name( name: 'index');
+        Route::get('/create', action:'create')->name( name: 'create');
+        Route::Post('/store', action:'store')->name( name: 'store');
+        Route::get('/edit/{id}', action:'edit')->name( name: 'edit');
+        Route::post('/update/{id}', action:'update')->name( name: 'update');
+        Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
+        Route::get('/show/{id}', action:'show')->name( name: 'show');
+    });
 });

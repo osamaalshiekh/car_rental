@@ -1,3 +1,17 @@
+<!-- /.card-body -->
+<div class="card-footer">
+    Footer
+</div>
+<!-- /.card-footer-->
+</div>
+<!-- /.card -->
+</div>
+</div>
+</div>
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
 
 <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
@@ -18,7 +32,12 @@
 <script src="{{asset("assets")}}/admin/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset("assets")}}/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="{{asset("assets")}}/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
-<script src="{{asset("assets")}}/admin/js/adminlte.min.js"></script>
+<script src="{{asset("assets")}}/admin/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{asset("assets")}}/admin/dist/js/demo.js"></script>
 </body>
 </html>
+
