@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ReservationController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminHomeController ;
 use App\Http\Controllers\Admin\CategoryController ;
@@ -24,6 +26,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//*************** HOMECONTROLLER routes **********
+Route::get('/',[HomeController::class,'index'])->name('home');
 
 
 Route::prefix( 'admin')->name('admin.')->group(function () {
@@ -41,6 +45,8 @@ Route::prefix( 'admin')->name('admin.')->group(function () {
         Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
         Route::get('/show/{id}', action:'show')->name( name: 'show');
 });
+    //*************** admin CarController routes **********
+
     Route::prefix( '/car')->name('car.')->controller(CarController::class)->group(function () {
         Route::get('/', action:'index')->name( name: 'index');
         Route::get('/create', action:'create')->name( name: 'create');
@@ -49,5 +55,16 @@ Route::prefix( 'admin')->name('admin.')->group(function () {
         Route::post('/update/{id}', action:'update')->name( name: 'update');
         Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
         Route::get('/show/{id}', action:'show')->name( name: 'show');
+    });
+
+
+    //*************** admin ReservationController routes **********
+    Route::prefix('reservation')->name('reservation.')->controller(ReservationController::class)->group(function () {
+        Route::get('/','index')->name('index');
+        Route::get('/approve/{id}','show')->name('approve');
+        Route::post('/update/{id}','update')->name('update');
+        Route::get('/show/{id}','show')->name('show');
+        Route::get('/destroy/{id}','destroy')->name('destroy');
+
     });
 });

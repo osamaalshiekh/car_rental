@@ -46,9 +46,19 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin.car.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-anchor"></i>
+                        <i class="nav-icon fas fa-car"></i>
                         <p>
                             Cars
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{route('admin.reservation.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-lock"></i>
+                        <p>
+                            Reservations
                             <span class="right badge badge-danger"></span>
                         </p>
                     </a>
