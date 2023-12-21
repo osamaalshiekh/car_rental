@@ -12,7 +12,14 @@
             <a href="#" class="nav-link">Contact</a>
         </li>
     </ul>
-
+    @if(auth()->check())
+        <form method="post" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+    @else
+        <p>You are not logged in.</p>
+@endif
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->

@@ -63,7 +63,24 @@
                         </p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="{{route('admin.blog.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-lock"></i>
+                        <p>
+                            Blog
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('admin.setting.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-anchor"></i>
+                        <p>
+                            Setting
+                            <span class="right badge badge-danger"></span>
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
