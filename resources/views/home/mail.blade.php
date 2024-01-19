@@ -18,12 +18,18 @@
                         <form action="{{ route('send') }}" method="POST"
                               enctype="multipart/form-data">
                             @csrf
+
                             <div class="row">
                                 <div class="col-6 form-group">
                                     <input type="text" name="name" class="form-control p-4" placeholder="Your Name" required="required">                                </div>
                                 <div class="col-6 form-group">
                                     <input type="email" name="email" class="form-control p-4" placeholder="Your Email" required="required">
                                 </div>
+
+                            <!-- Add hidden input for user_id if the user is authenticated -->
+                            @if(Auth::check())
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                            @endif
                                 <div class="col-6 form-group">
                                     <input type="tel" name="phone" class="form-control p-4" placeholder="Phone number" required="required">
                                 </div>

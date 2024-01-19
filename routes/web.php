@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,14 @@ Route::get('/blog',[HomeController::class,'blog'])->name('blog');
 Route::get ('/mail',[HomeController::class,'mail'])->name('mail');;
 Route::post ('/mail',[ContactController::class,'send'])->name('send');
 
+// User panel route
+Route::get('/user/panel', [UserController::class, 'userPanel'])->name('user.panel');
+
+// Update email route
+Route::post('/user/update-email', [UserController::class, 'updateEmail'])->name('user.update.email');
+
+// Update password route
+Route::post('/user/update-password', [UserController::class, 'updatePassword'])->name('user.update.password');
 
 
 
