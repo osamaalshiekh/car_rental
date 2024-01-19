@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -76,6 +77,15 @@ Route::prefix( 'admin')->name('admin.')->group(function () {
         Route::get('/show/{id}', action:'show')->name( name: 'show');
     });
 
+    Route::prefix( '/invoice')->name('invoice.')->controller(InvoiceController::class)->group(function() {
+        Route::get('/', action:'index')->name( name: 'index');
+        Route::get('/create', action:'create')->name( name: 'create');
+        Route::Post('/store', action:'store')->name( name: 'store');
+        Route::get('/edit/{id}', action:'edit')->name( name: 'edit');
+        Route::post('/update/{id}', action:'update')->name( name: 'update');
+        Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
+        Route::get('/show/{id}', action:'show')->name( name: 'show');
+    });
 
     //*************** admin ReservationController routes **********
     Route::prefix('reservation')->name('reservation.')->controller(ReservationController::class)->group(function () {
