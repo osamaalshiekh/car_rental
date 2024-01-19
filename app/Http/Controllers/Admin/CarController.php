@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Category;
 
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CarController extends Controller
 {
@@ -57,9 +58,22 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $carId)
     {
-        //
+
+        $car = \App\Models\Car::find($carId);
+
+        if (!$car) {
+            abort(404, 'Car not found');
+        }
+
+        $qrCodeContent = "Car ID: $car->id, Model: $car->model, Color: $car->color";
+
+        $qrCode = QrCode::size(300)->generate($qrCodeContent);
+
+        // Return the view with the QR code
+        return view('admin.car.show', compact('car', 'qrCode','qrCodeContent'));
+
     }
 
     /**

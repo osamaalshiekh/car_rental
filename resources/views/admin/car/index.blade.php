@@ -61,6 +61,7 @@
                                         <td>
                                       <a href={{route('admin.car.edit',['id'=>$car->id ])}} class="btn btn-success" >Edit</a>
                                             <a href={{route('admin.car.destroy',['id'=>$car->id ])}} class="btn btn-danger" >Delete </a>
+                                            <a href={{route('admin.car.show',['id'=>$car->id ])}} class="btn btn-warning" >QrCode </a>
 
                                         </td>
                                     </tr>
