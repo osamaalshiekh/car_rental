@@ -20,6 +20,17 @@ class HomeController extends Controller
         ]);
     }
 
+    public function detail($pid)
+    {
+
+        $data = Car::find($pid);
+
+        return view('home.detail', [
+            'data' => $data,
+
+        ]);
+    }
+
     public function blog(){
         $data=Blog::all();
 

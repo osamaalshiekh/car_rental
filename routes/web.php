@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\InsuranceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,9 @@ Route::get('/blog',[HomeController::class,'blog'])->name('blog');
 
 Route::get ('/mail',[HomeController::class,'mail'])->name('mail');;
 Route::post ('/mail',[ContactController::class,'send'])->name('send');
+
+
+Route::get('/detail/{pid}',[HomeController::class,'detail'])->name('detail');
 
 // User panel route
 Route::get('/user/panel', [UserController::class, 'userPanel'])->name('user.panel');
@@ -112,9 +116,21 @@ Route::prefix( 'admin')->name('admin.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/update/{id}', 'update')->name('update');
     });
+
+    //***************admin MessageController routes************
     Route::prefix('message')->name('message.')->controller(ContactController::class)->group(function () {
         Route::get('/',  'index')->name('index');
 
+    });
+
+    //*****************admin InsuranceController routes**************
+    Route::prefix( '/insurance')->name('insurance.')->controller(InsuranceController::class)->group(function() {
+        Route::get('/', action:'index')->name( name: 'index');
+        Route::get('/create', action:'create')->name( name: 'create');
+        Route::Post('/store', action:'store')->name( name: 'store');
+        Route::get('/edit/{id}', action:'edit')->name( name: 'edit');
+        Route::post('/update/{id}', action:'update')->name( name: 'update');
+        Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
     });
 
 });

@@ -29,7 +29,7 @@ class ContactMail extends Mailable
         return new Envelope(
 
             subject:'contact us',
-            from:new Address('mohanadsoffo2002@gmail.com','Acme Media'),
+            from:new Address('mohanadsoffo2002@gmail.com','Admin'),
         );
     }
     /**

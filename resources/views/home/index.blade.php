@@ -210,7 +210,7 @@
                                 <span>25K</span>
                             </div>
                         </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Day</a>
+                        <a class="btn btn-primary px-3" href="{{route('detail',['pid'=>$rs->id])}}">more info</a>
                     </div>
                 </div>
                 @endforeach

@@ -61,7 +61,7 @@ class CarController extends Controller
     public function show(string $carId)
     {
 
-        $car = \App\Models\Car::find($carId);
+        $car =Car::find($carId);
 
         if (!$car) {
             abort(404, 'Car not found');
@@ -113,10 +113,21 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function destroy($id)
     {
-        $data= Car::find($id);
-        $data->delete();
-        return view('admin.car.index');
-}
+        // Find the insurance record by its ID
+        $cars = Car::find($id);
+
+        // If the record does not exist, return a response or redirect back with an error message
+        if (!$cars) {
+            return redirect()->route('admin.car.index')->with('error', 'Insurance post not found.');
+        }
+
+        // Delete the insurance record
+        $cars->delete();
+
+        // Redirect back to the index page with a success message
+        return redirect()->route('admin.car.index')->with('success', 'Insurance post deleted successfully.');
+    }
 }
