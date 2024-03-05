@@ -2,7 +2,6 @@
 
 @section('content')
 
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -53,10 +52,14 @@
                                         <td>{{ $rs->m_title }}</td>
                                         <td>{{ $rs->m_content }}</td>
                                         <td>{{ $rs->keyword }}</td>
-                                        <td>{{ $rs->image }}</td>
+                                        <td>     @if ($rs->image)
+                                                <img src="{{ Storage::url($rs->image) }}" style="height: 40px">
+                                            @endif                                       </td>
                                         <td>
-                                      <a href={{route('admin.blog.edit',['id'=>$rs->id ])}} class="btn btn-success" >Edit</a>
-                                            <a href={{route('admin.blog.destroy',['id'=>$rs->id ])}} class="btn btn-danger" >Delete </a>
+                                            <a href={{route('admin.blog.edit',['id'=>$rs->id ])}} class="btn btn-success"
+                                            >Edit</a>
+                                            <a href={{route('admin.blog.destroy',['id'=>$rs->id ])}} class="btn
+                                               btn-danger" >Delete </a>
 
                                         </td>
                                     </tr>
@@ -65,7 +68,8 @@
                             </table>
 
                             <div class="col-3 align-items-center">
-                                <a href="{{ route('admin.blog.create') }}" class="btn btn-block btn-outline-danger btn-sm">Add Blog</a>
+                                <a href="{{ route('admin.blog.create') }}"
+                                   class="btn btn-block btn-outline-danger btn-sm">Add Blog</a>
                             </div>
 
                         </div>

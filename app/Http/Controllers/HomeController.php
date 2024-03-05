@@ -45,4 +45,12 @@ class HomeController extends Controller
 
         return view('home.mail');
     }
+
+    public function search(Request $request){
+        $searchTerm = $request->input('search');
+        $data = Car::where('model', 'like', '%' . $searchTerm . '%')->get();
+        return view('home.search', compact('data'));
+    }
+
+
 }
