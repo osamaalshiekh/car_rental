@@ -1,6 +1,7 @@
 @extends('layouts.home')
 
 @section('title', 'Home')
+
 @section('content')
 
     <!-- Carousel Start -->
@@ -457,7 +458,6 @@
             </div>
         </div>
     </div>
-    <!-- Vendor End -->
 
 
 
@@ -469,3 +469,5 @@
 
 
 @endsection
+
+

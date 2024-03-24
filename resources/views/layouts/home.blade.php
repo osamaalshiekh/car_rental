@@ -1,6 +1,26 @@
 <html lang="en">
 
 <head>
+    <!-- Responsive -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,
+                 initial-scale=1">
+    <meta http-equiv="X-UA-Compatible"
+          content="ie=edge">
+
+
+    <!-- Meta Tags required for
+         Progressive Web App -->
+    <meta name=
+              "apple-mobile-web-app-status-bar"
+          content="#aa7700">
+    <meta name="theme-color"
+          content="black">
+
+    <!-- Manifest File link -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+
     <meta charset="utf-8">
     <title>@yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -42,6 +62,29 @@
 @include('home.footer')
 
 @yield('footer')
+<!-- Other HTML content -->
+
+<!-- Register service worker -->
+<script>
+    window.addEventListener('load', () => {
+        registerSW();
+    });
+
+    // Register the Service Worker
+    async function registerSW() {
+        if ('serviceWorker' in navigator) {
+            try {
+                await navigator
+                    .serviceWorker
+                    .register('serviceworker.js');
+            }
+            catch (e) {
+                console.log('SW registration failed');
+            }
+        }
+    }
+</script>
+
 
 </body>
 

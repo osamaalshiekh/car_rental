@@ -25,9 +25,7 @@ use App\Http\Controllers\Admin\InsuranceController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 //*************** HOMECONTROLLER routes **********
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
