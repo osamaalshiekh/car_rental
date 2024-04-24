@@ -36,6 +36,8 @@ Route::post ('/mail',[ContactController::class,'send'])->name('send');
 
 Route::get('/detail/{pid}',[HomeController::class,'detail'])->name('detail');
 Route::get('/search',[HomeController::class,'search'])->name('search');
+Route::post('/detail/comment',[HomeController::class,'make_comment'])->name('detail.comment');
+Route::post('/detail/comment-reply',[HomeController::class,'make_reply'])->name('detail.reply');
 
 // User panel route
 Route::get('/user/panel', [UserController::class, 'userPanel'])->name('user.panel');
