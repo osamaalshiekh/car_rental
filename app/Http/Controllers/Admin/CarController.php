@@ -42,6 +42,9 @@ class CarController extends Controller
         $cars->model = $request->model;
         $cars->category_id = $request->category_id;
         $cars->color = $request->color;
+        if ($request->file('image')) {
+            $cars->image = $request->file('image')->store('car_images', 'public');
+        }
         $cars->year = $request->year;
         $cars->price = $request->price;
         $cars->availability = $request->has('availability') ? true : false;
@@ -97,6 +100,9 @@ class CarController extends Controller
         $cars->model = $request->model;
         $cars->category_id = $request->category_id;
         $cars->color = $request->color;
+        if ($request->file('image')) {
+            $cars->image = $request->file('image')->store('car_images', 'public');
+        }
         $cars->year = $request->year;
         $cars->price = $request->price;
         $cars->availability = $request->has('availability') ? true : false;

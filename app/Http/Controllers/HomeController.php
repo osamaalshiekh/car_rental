@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index(){
 
-        $data=Car::latest()->get();
+        $data=Car::all();
         return view('home.index',[
 
             'data'=>$data,

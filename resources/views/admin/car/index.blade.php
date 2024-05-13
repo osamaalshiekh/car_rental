@@ -39,6 +39,7 @@
                                     <th>Model</th>
                                     <th>Category</th>
                                     <th>Color</th>
+                                    <th>Image</th>
                                     <th>Year</th>
                                     <th>Price</th>
                                     <th>Availability</th>
@@ -53,8 +54,10 @@
                                         <td>{{ $car->model }}</td>
                                             <td>{{ optional($car->category)->type }}</td>
                                         <td>{{ $car->color }}</td>
+                                        <td><img src="{{Storage::url($car->image) }}"  style="height: 80px"></td>
                                         <td>{{ $car->year }}</td>
                                         <td>{{ $car->price }}</td>
+
 
                                         <td>{{ $car->availability ? 'Available' : 'Not Available' }}</td>
                                         <td>{{ $car->license_plate }}</td>

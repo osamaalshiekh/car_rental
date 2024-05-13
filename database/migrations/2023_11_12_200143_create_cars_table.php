@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('color')->nullable();
+            $table->string('image')->nullable();
             $table->integer('year')->nullable();
             $table->decimal('price', 10, 2)->nullable();
             $table->boolean('availability')->default(true);

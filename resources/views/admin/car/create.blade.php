@@ -35,7 +35,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form action="{{ route('admin.car.store') }}" method="POST">
+                            <form action="{{ route('admin.car.store') }}" method="POST" enctype="multipart/form-data" >
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
@@ -53,6 +53,16 @@
                                     <div class="form-group">
                                         <label for="color">Color</label>
                                         <input type="text" class="form-control" id="color" name="color" placeholder="Enter car color">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-14">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="validatedCustomFile" required="" name="image">
+                                                <label class="custom-file-label" for="validatedCustomFile">Choose image...</label>
+                                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="year">Year</label>

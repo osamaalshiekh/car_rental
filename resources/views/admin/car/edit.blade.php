@@ -56,6 +56,10 @@
                                         <input type="text" class="form-control" id="color" name="color" value="{{ old('color', $car->color) }}" placeholder="Enter car color">
                                     </div>
                                     <div class="form-group">
+                                        <label for="image">Car Image</label>
+                                        <input type="file" name="image" id="image" value="{{ old('color', $car->image) }}">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="year">Year</label>
                                         <input type="number" class="form-control" id="year" name="year" value="{{ old('year', $car->year) }}" placeholder="Enter car year">
                                     </div>

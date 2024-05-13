@@ -7,6 +7,7 @@
         <h1>{{$data->model}}</h1>
         <h1>{{$data->category_id}}</h1>
         <h1>{{$data->year}}</h1>
+        <img src="{{Storage::url($data->image) }}"  style="height: 200px">
         <h1>{{$data->price}}</h1>
         <h1>{{$data->year}}</h1>
         <h1>{{$data->description}}</h1>
