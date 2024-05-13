@@ -10,7 +10,7 @@
         <div class="col-md-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <a class="text-body px-3" href="">
-                    <i class="fab fa-facebook-f"></i>
+                  <i class="fab fa-facebook-f"></i>
                 </a>
                 <a class="text-body px-3" href="">
                     <i class="fab fa-twitter"></i>
@@ -24,6 +24,7 @@
                 <a class="text-body pl-3" href="">
                     <i class="fab fa-youtube"></i>
                 </a>
+              
             @if(auth()->check())
                 @if(auth()->user()->is_admin)
                     <!-- Display admin dashboard link -->
@@ -34,7 +35,7 @@
                 @endif
             @endif
 
-            @if(auth()->check())
+           @auth
                 <!-- Display logout link if authenticated -->
                     <a class="text-body pl-3" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -46,7 +47,7 @@
             @else
                 <!-- Display login link if not authenticated -->
                     <a class="text-body pl-3" href="/login">Login</a>
-                @endif
+            @endauth
             </div>
             </div>
         </div>

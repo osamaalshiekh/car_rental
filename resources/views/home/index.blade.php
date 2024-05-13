@@ -195,7 +195,7 @@
                 @foreach($data as $rs)
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">
-                        <img src="{{Storage::url($rs->image) }}"  >
+                        <img src="{{Storage::url($rs->image) }}" s>
                         <h4 class="text-uppercase mb-4">{{$rs->model}}</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <div class="px-2">

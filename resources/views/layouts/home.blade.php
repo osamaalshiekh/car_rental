@@ -51,11 +51,11 @@
 
 <body>
 
-@include('home.header')
+@include('home.navbar')
 
 
 
-    @yield('content')
+@yield('content')
 
 
 
@@ -66,6 +66,7 @@
 
 <!-- Register service worker -->
 <script>
+    /*
     window.addEventListener('load', () => {
         registerSW();
     });
@@ -83,6 +84,7 @@
             }
         }
     }
+    */
 </script>
 
 
