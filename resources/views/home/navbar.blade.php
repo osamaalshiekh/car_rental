@@ -24,7 +24,7 @@
                 <a class="text-body pl-3" href="">
                     <i class="fab fa-youtube"></i>
                 </a>
-              
+
             @if(auth()->check())
                 @if(auth()->user()->is_admin)
                     <!-- Display admin dashboard link -->
@@ -110,7 +110,8 @@
         </div>
     </form>
 </div>
-
+fhgfhfhdddddddddddddddddddddddddddddddddddddddddddddddddddd
+gffff
 
 
 <!-- Search End -->
