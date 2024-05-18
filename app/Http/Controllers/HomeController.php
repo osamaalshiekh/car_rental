@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Car;
 use App\Models\Comment;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,13 +25,19 @@ class HomeController extends Controller
 
     public function detail($pid)
     {
+        $user=Auth::user();
+        $data = Car::findOrFail($pid);
+        $reservation = null;
 
-        $data = Car::find($pid);
+        if ($user) {
+            $reservation = Reservation::where('user_id', $user->id)->first();
+        }
         $comments = $data->comments()->latest()->get();
 
         return view('home.detail', [
             'data' => $data,
-            'comments' => $comments
+            'comments' => $comments,
+            'reservation' => $reservation
 
         ]);
     }

@@ -9,8 +9,10 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\InvoiceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\CheckAdmin;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\InsuranceController;
 
@@ -26,7 +28,6 @@ use App\Http\Controllers\Admin\InsuranceController;
 */
 
 
-//*************** HOMECONTROLLER routes **********
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
 
@@ -49,13 +50,20 @@ Route::post('/user/update-email', [UserController::class, 'updateEmail'])->name(
 Route::post('/user/update-password', [UserController::class, 'updatePassword'])->name('user.update.password');
 
 
+// Show the payment form
+Route::middleware('auth')->get('/payment/{car}', [PaymentController::class, 'showPaymentForm'])->name('payment.form');
+
+// Create Stripe Checkout session and redirect
+Route::middleware('auth')->post('/create-checkout-session/{car}', [PaymentController::class, 'createCheckoutSession'])->name('create.checkout.session');
+
+// Stripe success and cancel URLs
+Route::middleware('auth')->get('/success', [PaymentController::class, 'success'])->name('checkout.success');
+Route::middleware('auth')->get('/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
 
 
-
-Route::middleware(['auth', \App\Http\Middleware\CheckAdmin::class . ':admin,moderator'])->group(function () {
-
-Route::prefix( 'admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminHomeController::class,'index'])->name('index');
+Route::middleware(['auth', CheckAdmin::class . ':Admin,Moderator,User'])->group(function () {
+    Route::prefix('admin')->name('admin.')->middleware(CheckAdmin::class . ':Admin,Moderator')->group(function () {
+        Route::get('/', [AdminHomeController::class, 'index'])->name('index');
 
 
 
@@ -145,5 +153,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__ . '/auth.php';

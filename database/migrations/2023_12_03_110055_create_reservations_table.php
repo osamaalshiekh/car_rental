@@ -18,9 +18,11 @@ return new class extends Migration
             $table->date('rezDate');
             $table->date('retDate');
             $table->integer('days');
-            $table->integer('price');
-            $table->integer('total');
+            $table->decimal('price', 10, 2);
+            $table->decimal('total', 10, 2);
             $table->text('note')->nullable();
+            $table->string('payment_status')->default('pending');
+            $table->string('payment_intent_id')->nullable();
             $table->timestamps();
         });
     }

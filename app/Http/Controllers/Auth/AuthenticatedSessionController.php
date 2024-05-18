@@ -34,11 +34,9 @@ class AuthenticatedSessionController extends Controller
 
             if ($user instanceof \App\Models\User && method_exists($user, 'hasRole')) {
                 if ($user->hasRole('Admin') || $user->hasRole('Moderator')) {
-                    // Redirect admin and moderator to their respective dashboards
-                    return redirect()->route('admin.index');
+                    return redirect()->route('home');
                 } else {
-                    Auth::logout();
-                    return redirect()->route('login')->with('error', 'You do not have permission to log in.');
+                    return redirect()->route('home'); // Redirect regular users to the 'index' route
                 }
             }
         }

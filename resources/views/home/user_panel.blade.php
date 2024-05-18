@@ -42,7 +42,36 @@
             <!-- Section 2: My Orders -->
             <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                 <h2>My Orders</h2>
-                <!-- Add content for orders here -->
+                @if ($reservation)
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Car ID</th>
+                                <th>Car Details</th>
+                                <th>Pickup Date</th>
+                                <th>Return Date</th>
+                                <th>Total Days</th>
+                                <th>Total Price</th>
+                                <th>Payment Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{ $reservation->car_id }}</td>
+                                <td><a href="{{ route('detail', ['pid' => $reservation->car_id]) }}">View Car</a></td>
+                                <td>{{ $reservation->rezDate }}</td>
+                                <td>{{ $reservation->retDate }}</td>
+                                <td>{{ $reservation->days }}</td>
+                                <td>${{ number_format($reservation->total, 2) }}</td>
+                                <td>{{ $reservation->payment_status }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p>No reservations found.</p>
+                @endif
             </div>
 
             <!-- Section 3: Account Settings -->

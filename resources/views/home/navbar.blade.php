@@ -25,17 +25,17 @@
                     <i class="fab fa-youtube"></i>
                 </a>
 
-            @if(auth()->check())
-                @if(auth()->user()->is_admin)
-                    <!-- Display admin dashboard link -->
-                        <a class="text-body pl-3" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
-                @else
-                    <!-- Display user panel link -->
+                @if(auth()->check())
+                    @if(auth()->user()->hasRole('Admin'))
+                        <!-- Display admin dashboard link -->
+                        <a class="text-body pl-3" href="{{ route('admin.index') }}">Admin Dashboard</a>
+                    @else
+                        <!-- Display user panel link -->
                         <a class="text-body pl-3" href="{{ route('user.panel') }}">My Panel</a>
+                    @endif
                 @endif
-            @endif
 
-           @auth
+            @auth
                 <!-- Display logout link if authenticated -->
                     <a class="text-body pl-3" href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -110,8 +110,7 @@
         </div>
     </form>
 </div>
-fhgfhfhdddddddddddddddddddddddddddddddddddddddddddddddddddd
-gffff
+
 
 
 <!-- Search End -->

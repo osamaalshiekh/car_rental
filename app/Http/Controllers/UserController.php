@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Contact;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,8 +13,10 @@ class UserController extends Controller
     public function userPanel()
     {
         $messages = Contact::where('user_id', Auth::id())->get();
+        $reservation=Reservation::where('user_id', Auth::id())->first();
 
-        return view('home.user_panel', compact('messages'));    }
+        return view('home.user_panel', compact('messages','reservation'));
+    }
 
     public function updateEmail(Request $request)
     {
