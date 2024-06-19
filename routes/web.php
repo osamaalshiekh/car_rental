@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\BotManController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
@@ -36,6 +37,7 @@ Route::post ('/mail',[ContactController::class,'send'])->name('send');
 
 
 Route::get('/detail/{pid}',[HomeController::class,'detail'])->name('detail');
+Route::get('/blogdetail/{id}',[HomeController::class,'blogdetail'])->name('blogdetail');
 Route::get('/search',[HomeController::class,'search'])->name('search');
 Route::post('/detail/comment',[HomeController::class,'make_comment'])->name('detail.comment');
 Route::post('/detail/comment-reply',[HomeController::class,'make_reply'])->name('detail.reply');
@@ -59,6 +61,11 @@ Route::middleware('auth')->post('/create-checkout-session/{car}', [PaymentContro
 // Stripe success and cancel URLs
 Route::middleware('auth')->get('/success', [PaymentController::class, 'success'])->name('checkout.success');
 Route::middleware('auth')->get('/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
+
+Route::get('/chat', function () {
+    return view('home.botman');});
+// Existing BotMan handling route
+Route::match(['get', 'post'], '/botman', [BotManController::class, 'handle']);
 
 
 Route::middleware(['auth', CheckAdmin::class . ':Admin,Moderator,User'])->group(function () {

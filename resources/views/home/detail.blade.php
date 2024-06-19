@@ -1,7 +1,10 @@
 @extends('layouts.home')
 
 @section('title', 'Home')
+
 @section('content')
+
+
 
     <div class="container pt-5 pb-3">
         <div class="card mb-3">
@@ -49,7 +52,7 @@
                         <input type="text" class="form-control" id="total_price" name="total_price" readonly>
                     </div>
                     @auth
-                        @if ($reservation)
+                        @if ($activeReservationExists)
                             <div style="background-color: #f8d7da; padding: 10px;">
                                 <span style="color: #721c24;">You already have a reservation.</span>
                             </div>
@@ -118,6 +121,7 @@
                     @endif
                 @endforeach
             </div>
+
             <div class="col-md-6">
                 @auth
                     <div class="card mb-3">

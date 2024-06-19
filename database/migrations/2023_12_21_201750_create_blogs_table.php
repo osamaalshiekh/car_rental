@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title'); // The title of the blog post
-            $table->longText('content'); // The content or body of the blog post
+            $table->longText('bcontent'); // The content or body of the blog post
             $table->string('m_title'); // A unique slug for SEO-friendly URLs
             $table->string('m_content'); // A unique slug for SEO-friendly URLs
             $table->string('keyword'); // A unique slug for SEO-friendly URLs

@@ -14,7 +14,7 @@ class HomeController extends Controller
 {
     public function index(){
 
-        $data=Car::all();
+        $data = Car::where('availability', true)->get();
         return view('home.index',[
 
             'data'=>$data,
@@ -27,17 +27,14 @@ class HomeController extends Controller
     {
         $user=Auth::user();
         $data = Car::findOrFail($pid);
-        $reservation = null;
+        $activeReservationExists = $user ? $user->reservations()->where('status', 'active')->exists() : false;
 
-        if ($user) {
-            $reservation = Reservation::where('user_id', $user->id)->first();
-        }
         $comments = $data->comments()->latest()->get();
 
         return view('home.detail', [
             'data' => $data,
             'comments' => $comments,
-            'reservation' => $reservation
+            'activeReservationExists'=>$activeReservationExists
 
         ]);
     }
@@ -50,6 +47,15 @@ class HomeController extends Controller
            'data'=>$data
         ]);
 
+    }
+    public function blogdetail($id){
+
+        $data=Blog::find($id);
+        return view('home.blogdetail',[
+
+                'data'=>$data
+
+        ]);
     }
 
     public function mail(){

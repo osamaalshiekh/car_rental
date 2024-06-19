@@ -48,7 +48,7 @@
                                     <tr>
                                         <td>{{ $rs->id }}</td>
                                         <td>{{ $rs->title }}</td>
-                                        <td>{{ \Illuminate\Support\Str::limit($rs->content, 20) }}</td>
+                                        <td>{{ \Illuminate\Support\Str::limit($rs->bcontent, 20) }}</td>
                                         <td>{{ $rs->m_title }}</td>
                                         <td>{{ $rs->m_content }}</td>
                                         <td>{{ $rs->keyword }}</td>
@@ -56,8 +56,7 @@
                                                 <img src="{{ Storage::url($rs->image) }}" style="height: 40px">
                                             @endif                                       </td>
                                         <td>
-                                            <a href={{route('admin.blog.edit',['id'=>$rs->id ])}} class="btn btn-success"
-                                            >Edit</a>
+                                            <a href={{route('admin.blog.edit',['id'=>$rs->id ])}} class="btn btn-success">Edit</a>
                                             <a href={{route('admin.blog.destroy',['id'=>$rs->id ])}} class="btn
                                                btn-danger" >Delete </a>
 

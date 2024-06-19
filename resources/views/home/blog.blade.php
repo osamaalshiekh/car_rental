@@ -29,7 +29,7 @@
                                 <span>25K</span>
                             </div>
                         </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Day</a>
+                        <a class="btn btn-primary px-3" href="{{route('blogdetail',['id'=>$rs->id])}}">Read</a>
                     </div>
                 </div>
                 @endforeach

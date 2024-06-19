@@ -19,9 +19,12 @@
             <li class="nav-item">
                 <a class="nav-link" id="orders-tab" data-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false">My Orders</a>
             </li>
+            </li><li class="nav-item">
+                <a class="nav-link" id="old-tab" data-toggle="tab" href="#old" role="tab" aria-controls="old" aria-selected="false">old reservations</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="false">Account Settings</a>
-            </li>
+
         </ul>
 
         <!-- Tab panes -->
@@ -42,7 +45,7 @@
             <!-- Section 2: My Orders -->
             <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                 <h2>My Orders</h2>
-                @if ($reservation)
+                @forelse($reservation->where('status', 'active') as $reservation)
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -54,6 +57,7 @@
                                 <th>Total Days</th>
                                 <th>Total Price</th>
                                 <th>Payment Status</th>
+                                <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -65,13 +69,49 @@
                                 <td>{{ $reservation->days }}</td>
                                 <td>${{ number_format($reservation->total, 2) }}</td>
                                 <td>{{ $reservation->payment_status }}</td>
+                                <td>{{ $reservation->status }}</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                @else
+                @empty
                     <p>No reservations found.</p>
-                @endif
+                @endforelse
+            </div>
+            <div class="tab-pane fade" id="old" role="tabpanel" aria-labelledby="old-tab">
+              <h2>Old Reservations</h2>
+             @forelse($reservation->where('status', 'completed') as $res)
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Car ID</th>
+                            <th>Car Details</th>
+                            <th>Pickup Date</th>
+                            <th>Return Date</th>
+                            <th>Total Days</th>
+                            <th>Total Price</th>
+                            <th>Payment Status</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ $res->car_id }}</td>
+                            <td><a href="{{ route('detail', ['pid' => $res->car_id]) }}">View Car</a></td>
+                            <td>{{ $res->rezDate }}</td>
+                            <td>{{ $res->retDate }}</td>
+                            <td>{{ $res->days }}</td>
+                            <td>${{ number_format($res->total, 2) }}</td>
+                            <td>{{ $res->payment_status }}</td>
+                            <td>{{ $res->status }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+             @empty
+                <p>No old reservations found.</p>
+             @endforelse
             </div>
 
             <!-- Section 3: Account Settings -->

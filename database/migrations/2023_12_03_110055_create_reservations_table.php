@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('note')->nullable();
             $table->string('payment_status')->default('pending');
             $table->string('payment_intent_id')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

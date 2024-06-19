@@ -46,11 +46,21 @@
 
     <!-- Template Stylesheet -->
     <link href="{{asset("assets")}}/home/css/style.css" rel="stylesheet">
+    <meta charset="utf-apper">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 </head>
 @yield('head')
 
 <body>
+<script>
+    var botmanWidget = {
+        aboutText: 'type "help" if you are stuck!',
+        introMessage: "Hello! this is Botman and i am here to help you if you want to have a normal conversation with me say yes! if you want a help with something regarding the website type no! if you got stuck and want help just type help!",
 
+    };
+</script>
+<script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
 @include('home.navbar')
 
 

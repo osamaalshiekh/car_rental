@@ -39,7 +39,7 @@ class BlogController extends Controller
         // Create a new blog post
         Blog::create([
             'title' => $request->input('title'),
-            'content' => $request->input('content'),
+            'bcontent' => $request->input('bcontent'),
             'm_title' => $request->input('m_title'),
             'm_content' => $request->input('m_content'),
             'keyword' => $request->input('keyword'),
@@ -78,7 +78,17 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $blog=Blog::find($id);
+        $blog->title = $request->title;
+        if ($request->file('image')) {
+            $blog->image = $request->file('image')->store('images/blogs', 'public');
+        }
+        $blog->m_title = $request->m_title;
+        $blog->bcontent = $request->bcontent;
+        $blog->m_content = $request->m_content;
+        $blog->keyword = $request->keyword;
+        $blog->save();
+        return redirect('admin/blog');
     }
 
     /**
@@ -88,12 +98,15 @@ class BlogController extends Controller
     {
         $blog = Blog::find($id);
         if (!$blog) {
-            abort(404);
+            return redirect()->route('admin.blog.index')->with('error', 'Blog not found');
         }
-        $blog->delete();
 
-        return view('admin.blog.index',compact('blog'));
-
-
+        if ($blog->delete()) {
+            // Redirect with success message if delete was successful
+            return redirect()->route('admin.blog.index')->with('success', 'Blog deleted successfully');
+        } else {
+            // Redirect with error message if delete failed
+            return redirect()->route('admin.blog.index')->with('error', 'Failed to delete the blog');
+        }
     }
 }

@@ -42,8 +42,8 @@
                                     <input type="text" name="title" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="content">Content</label>
-                                    <textarea name="content" class="form-control" rows="8" required></textarea>
+                                    <label for="bcontent">Content</label>
+                                    <textarea name="bcontent" class="form-control" rows="8" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="m_title">Meta Title</label>

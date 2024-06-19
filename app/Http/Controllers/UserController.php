@@ -13,7 +13,7 @@ class UserController extends Controller
     public function userPanel()
     {
         $messages = Contact::where('user_id', Auth::id())->get();
-        $reservation=Reservation::where('user_id', Auth::id())->first();
+        $reservation=Reservation::where('user_id', Auth::id())->get();
 
         return view('home.user_panel', compact('messages','reservation'));
     }

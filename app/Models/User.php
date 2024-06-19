@@ -74,5 +74,9 @@ class User extends Authenticatable
     {
         return $this->roles()->whereIn('name', $roles)->exists();
     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 
 }

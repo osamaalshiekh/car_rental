@@ -40,8 +40,8 @@
                                     <th>Price</th>
                                     <th>total</th>
                                     <th>note</th>
-                                    <th>status</th>
-                                    <th>Actions</th>
+                                    <th>payment status</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -56,6 +56,7 @@
                                         <td>{{ $res->total }}</td>
                                         <td>{{ $res->note }}</td>
                                         <td>{{ $res->status }}</td>
+
 
                                     </tr>
 

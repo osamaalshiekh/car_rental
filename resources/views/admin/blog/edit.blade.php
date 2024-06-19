@@ -9,13 +9,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit Car</h1>
+                        <h1>Edit Blog</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Cars</a></li>
-                            <li class="breadcrumb-item active">Edit Car</li>
+                            <li class="breadcrumb-item"><a href="#">Blogs</a></li>
+                            <li class="breadcrumb-item active">Edit Blog</li>
                         </ol>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                         <!-- Default box -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Edit Car</h3>
+                                <h3 class="card-title">Edit Blog</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -40,58 +40,35 @@
 
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="model">Car Model</label>
-                                        <input type="text" class="form-control" id="model" name="model" value="{{ old('model', $blog->model) }}" placeholder="Enter car model">
+                                        <label for="title">title</label>
+                                        <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $blog->title) }}" >
                                     </div>
-                                    <div class="form-group">
-                                        <label for="category">Category</label>
-                                        <select class="form-control" id="category" name="category_id">
-                                            @foreach($categories as $category)
-                                                <option value="{{ $category->id }}" {{ $category->id == $car->category_id ? 'selected' : '' }}>{{ $category->type }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="color">Color</label>
-                                        <input type="text" class="form-control" id="color" name="color" value="{{ old('color', $car->color) }}" placeholder="Enter car color">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="year">Year</label>
-                                        <input type="number" class="form-control" id="year" name="year" value="{{ old('year', $car->year) }}" placeholder="Enter car year">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="price">Price</label>
-                                        <input type="text" class="form-control" id="price" name="price" value="{{ old('price', $car->price) }}" placeholder="Enter car price">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="transmission">Transmission</label>
-                                        <input type="text" class="form-control" id="transmission" name="transmission" value="{{ old('transmission', $car->transmission) }}" placeholder="Enter transmission type">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="mileage">Mileage</label>
-                                        <input type="text" class="form-control" id="mileage" name="mileage" value="{{ old('mileage', $car->mileage) }}" placeholder="Enter car mileage">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fuel_type">Fuel Type</label>
-                                        <input type="text" class="form-control" id="fuel_type" name="fuel_type" value="{{ old('fuel_type', $car->fuel_type) }}" placeholder="Enter fuel type">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="engine_size">License plate</label>
-                                        <input type="text" class="form-control" id="engine_size" name="engine_size" value="{{ old('license_plate', $car->license_plate) }}" placeholder="Enter license plate">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="description">Description</label>
-                                        <textarea class="form-control" id="description" name="description" placeholder="Enter car description">{{ old('description', $car->description) }}</textarea>
-                                    </div>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="availability" name="availability" {{ $car->availability ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="availability">Available</label>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
 
-                                <div class="card-footer">
+                                    <div class="form-group">
+                                        <label for="bcontent">content</label>
+                                        <input type="text" class="form-control" id="bcontent" name="bcontent" value="{{ old('content', $blog->bcontent) }}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="m_title">m_title</label>
+                                        <input type="text" class="form-control" id="m_title" name="m_title" value="{{ old('m_title', $blog->m_title) }}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="m_content">m_content</label>
+                                        <input type="text" class="form-control" id="m_content" name="m_content" value="{{ old('m_content', $blog->m_content) }}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="keyword">keyword</label>
+                                        <input type="text" class="form-control" id="keyword" name="keyword" value="{{ old('keyword', $blog->keyword) }}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">blog Image</label>
+                                        <input type="file" name="image" id="image" value="{{ old('image', $blog->image) }}">
+                                    </div>
+
+
+                                  <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Update</button>
+                                  </div>
                                 </div>
                             </form>
 
