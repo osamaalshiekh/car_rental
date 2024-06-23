@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\FAQController;
 use App\Http\Controllers\Admin\ReservationController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\InvoiceController;
@@ -14,6 +16,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdmin;
+use App\Mail\InvoiceMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\InsuranceController;
 
@@ -28,16 +32,22 @@ use App\Http\Controllers\Admin\InsuranceController;
 |
 */
 
-
+Route::get('/test-email', function () {
+    $invoice = App\Models\Invoice::latest()->first();
+    Mail::to('yamanali351@gmail.com')->send(new InvoiceMail($invoice));
+    return 'Email sent';
+});
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/blog',[HomeController::class,'blog'])->name('blog');
-
-Route::get ('/mail',[HomeController::class,'mail'])->name('mail');;
+Route::get('/faq',[HomeController::class,'faq'])->name('faq');
+Route::get('/about',[HomeController::class,'about'])->name('about');
+Route::get ('/mail',[HomeController::class,'mail'])->name('mail');
 Route::post ('/mail',[ContactController::class,'send'])->name('send');
 
 
 Route::get('/detail/{pid}',[HomeController::class,'detail'])->name('detail');
 Route::get('/blogdetail/{id}',[HomeController::class,'blogdetail'])->name('blogdetail');
+
 Route::get('/search',[HomeController::class,'search'])->name('search');
 Route::post('/detail/comment',[HomeController::class,'make_comment'])->name('detail.comment');
 Route::post('/detail/comment-reply',[HomeController::class,'make_reply'])->name('detail.reply');
@@ -149,6 +159,27 @@ Route::middleware(['auth', CheckAdmin::class . ':Admin,Moderator,User'])->group(
         Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
     });
 
+        Route::prefix( '/faq')->name('faq.')->controller(FAQController::class)->group(function() {
+            Route::get('/', action:'index')->name( name: 'index');
+            Route::get('/create', action:'create')->name( name: 'create');
+            Route::Post('/store', action:'store')->name( name: 'store');
+            Route::get('/edit/{id}', action:'edit')->name( name: 'edit');
+            Route::post('/update/{id}', action:'update')->name( name: 'update');
+            Route::get('/destroy/{id}', action:'destroy')->name( name: 'destroy');
+            Route::get('/show/{id}', action:'show')->name( name: 'show');
+        });
+
+        //*****************admin InsuranceController routes**************
+        Route::prefix('/roles')->name('roles.')->controller(RoleController::class)->group(function() {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{role}', 'edit')->name('edit');
+            Route::post('/update/{role}', 'update')->name('update');
+            Route::get('/destroy/{role}', 'destroy')->name('destroy');
+            Route::get('/assign/{user}', 'assignRoles')->name('assign');
+            Route::post('/assign/{user}', 'updateUserRoles')->name('updateUserRoles');
+        });
 });
 });
 Route::get('/dashboard', function () {

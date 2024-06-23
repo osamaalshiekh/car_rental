@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
 use App\Models\Car;
+use App\Models\Invoice;
 use App\Models\Reservation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Stripe\PaymentIntent;
 use Stripe\Checkout\Session as StripeSession;
 use Stripe\Stripe;
@@ -100,10 +103,34 @@ class PaymentController extends Controller
             $car->availability = false;
             $car->save();
 
+            // Create invoice
+            $invoice = new Invoice([
+                'invoice_number' => $this->generateInvoiceNumber(),
+                'date' => Carbon::now(),
+                'client_name' => $reservation->user->name,
+                'client_email' => $reservation->user->email,
+                'total_amount' => $total,
+                'due_date' => Carbon::now()->addMonth(),
+                'status' => 'sent',
+                'car_id' => $carId,
+            ]);
+            $invoice->save();
+
+            // Send invoice via email
+            Mail::to($invoice->client_email)->send(new InvoiceMail($invoice));
+
+
             return redirect()->route('detail', ['pid' => $carId])->with('success', 'Payment successful and car reserved.');
         } catch (\Exception $e) {
             return redirect()->route('home')->with('error', $e->getMessage());
         }
+    }
+
+
+    private function generateInvoiceNumber()
+    {
+        $latestInvoice = Invoice::latest()->first();
+        return $latestInvoice ? $latestInvoice->invoice_number + 1 : 1;
     }
 
     public function cancel()

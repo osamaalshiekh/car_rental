@@ -85,36 +85,36 @@
                                     @endfor
                                 </h6>
                                 <p class="card-text">{{ $comment->subject }}</p>
-                                @auth  {{-- Checks if the user is authenticated --}}
-                                @php
-                                    $isAdminOrModerator = false;
-                                    $user = auth()->user();
-                                    foreach ($user->roles as $role) {
-                                        if ($role['name'] === 'Moderator' || $role['name'] === 'Admin') {
-                                            $isAdminOrModerator = true;
-                                            break;
+                                @auth
+                                    @php
+                                        $isAdminOrModerator = false;
+                                        $user = auth()->user();
+                                        foreach ($user->roles as $role) {
+                                            if ($role['name'] === 'Moderator' || $role['name'] === 'Admin') {
+                                                $isAdminOrModerator = true;
+                                                break;
+                                            }
                                         }
-                                    }
-                                @endphp
+                                    @endphp
 
-                                @if(isset($comment->reply))
-                                    <div class="card mt-3">
-                                        <div class="card-body">
-                                            <h6 class="card-subtitle mb-2 text-muted">Reply</h6>
-                                            <p class="card-text">{{ $comment->reply->subject }}</p>
+                                    @if(isset($comment->reply))
+                                        <div class="card mt-3">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">Admin reply</h6>
+                                                <p class="card-text">{{ $comment->reply->subject }}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    @endif
 
-                                @if(!isset($comment->reply) && $isAdminOrModerator)
-                                    <form class="mt-3" method="post" action="{{ route('detail.reply') }}">
-                                        @csrf
-                                        <input type="text" name="reply" class="form-control mb-2" placeholder="Write a reply...">
-                                        <input type="hidden" name="comment_id" value="{{ $comment->id }}">
-                                        <input type="hidden" name="car_id" value="{{ $data->id }}">
-                                        <button type="submit" class="btn btn-sm btn-primary">Reply</button>
-                                    </form>
-                                @endif
+                                    @if(!isset($comment->reply) && $isAdminOrModerator)
+                                        <form class="mt-3" method="post" action="{{ route('detail.reply') }}">
+                                            @csrf
+                                            <input type="text" name="reply" class="form-control mb-2" placeholder="Write a reply..." required>
+                                            <input type="hidden" name="comment_id" value="{{ $comment->id }}">
+                                            <input type="hidden" name="car_id" value="{{ $data->id }}">
+                                            <button type="submit" class="btn btn-sm btn-primary">Reply</button>
+                                        </form>
+                                    @endif
                                 @endauth
                             </div>
                         </div>
@@ -142,15 +142,14 @@
                                 @csrf
                                 <input name="car_id" type="hidden" value="{{$data->id}}">
                                 <textarea class="form-control animated" cols="50" id="new-review" name="subject"
-                                          placeholder="Enter your review here..." rows="5"></textarea>
+                                          placeholder="Enter your review here..." rows="5" required></textarea>
 
                                 <div class="rating">
-                                    <input type="radio" name="rate" -o empty value="5" id="5"><label for="5">☆</label>
-                                    <input type="radio" name="rate" -o empty value="4" id="4"><label for="4">☆</label>
-                                    <input type="radio" name="rate" -o empty value="3" id="3"><label for="3">☆</label>
-                                    <input type="radio" name="rate" -o empty value="2" id="2"><label for="2">☆</label>
-                                    <input type="radio" name="rate" -o empty value="1" id="1"><label for="1">☆</label>
-
+                                    <input type="radio" name="rate" value="5" id="5"><label for="5">☆</label>
+                                    <input type="radio" name="rate" value="4" id="4"><label for="4">☆</label>
+                                    <input type="radio" name="rate" value="3" id="3"><label for="3">☆</label>
+                                    <input type="radio" name="rate" value="2" id="2"><label for="2">☆</label>
+                                    <input type="radio" name="rate" value="1" id="1"><label for="1">☆</label>
                                 </div>
 
                                 <div class="text-right">
@@ -166,6 +165,7 @@
                 @endauth
             </div>
         </div>
+
     </div>
 
     <script>

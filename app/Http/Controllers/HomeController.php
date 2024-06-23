@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Car;
 use App\Models\Comment;
+use App\Models\FAQ;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,14 @@ class HomeController extends Controller
            'data'=>$data
         ]);
 
+    } public function faq(){
+        $data=FAQ::all();
+
+        return view('home.faq',[
+
+           'data'=>$data
+        ]);
+
     }
     public function blogdetail($id){
 
@@ -57,6 +66,8 @@ class HomeController extends Controller
 
         ]);
     }
+
+
 
     public function mail(){
 
@@ -86,23 +97,27 @@ class HomeController extends Controller
         return redirect()->back()->with("success","Commented gracefully!");
     }
 
-    public function make_reply(Request $req){
+    public function make_reply(Request $request){
 
-        $req->validate([
-            'rate' => 'required',
-            'subject' => 'required'
+        $request->validate([
+            'reply' => 'required|string',
+            'comment_id' => 'required|exists:comments,id',
+            'car_id' => 'required|exists:cars,id'
         ]);
 
-        $newComment = new Comment();
-        $newComment->user_id = auth()->user()->id;
-        $newComment->car_id = $req->car_id;
-        $newComment->rate = -1;
-        $newComment->type = "REPLY";
-        $newComment->comment_id = $req->comment_id;
-        $newComment->subject = $req->reply;
-        $newComment->save();
+        $comment = new Comment();
+        $comment->subject = $request->reply;
+        $comment->type = 'REPLY';
+        $comment->user_id = auth()->id();
+        $comment->comment_id = $request->comment_id;
+        $comment->car_id = $request->car_id;
+        $comment->save();
         return redirect()->back()->with("success","Commented gracefully!");
     }
 
+    public function about(){
+
+        return view('home.about');
+    }
 
 }
