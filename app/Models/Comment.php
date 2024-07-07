@@ -21,4 +21,7 @@ class Comment extends Model
     public function reply(){
         return $this->hasOne(Comment::class,"comment_id","id");
     }
+    public function replies(){
+        return $this->hasMany(Comment::class, 'comment_id', 'id');
+    }
 }

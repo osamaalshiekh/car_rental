@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Category;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CarController extends Controller
@@ -122,18 +123,29 @@ class CarController extends Controller
 
     public function destroy($id)
     {
-        // Find the insurance record by its ID
-        $cars = Car::find($id);
+        DB::transaction(function () use ($id) {
+            $car = Car::with('comments.replies')->find($id);
+            if (!$car) {
+                return redirect()->route('admin.car.index')->with('error', 'Car not found');
+            }
 
-        // If the record does not exist, return a response or redirect back with an error message
-        if (!$cars) {
-            return redirect()->route('admin.car.index')->with('error', 'Insurance post not found.');
-        }
+            // Recursively delete all comments and their replies
+            $this->deleteComments($car->comments);
 
-        // Delete the insurance record
-        $cars->delete();
+            // Delete the car
+            $car->delete();
+        });
 
-        // Redirect back to the index page with a success message
-        return redirect()->route('admin.car.index')->with('success', 'Insurance post deleted successfully.');
+        return redirect()->route('admin.car.index')->with('success', 'Car deleted successfully');
     }
+
+    protected function deleteComments($comments)
+    {
+        foreach ($comments as $comment) {
+            if ($comment->replies) {
+                $this->deleteComments($comment->replies);
+            }
+            $comment->delete();
+        }
+}
 }

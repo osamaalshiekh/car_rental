@@ -13,22 +13,9 @@
                 @foreach($data as $rs)
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="{{Storage::url($rs->image)}}" alt="">
-                        <h4 class="text-uppercase mb-4">title</h4>
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="px-2">
-                                <i class="fa fa-car text-primary mr-1"></i>
-                                <span>2015</span>
-                            </div>
-                            <div class="px-2 border-left border-right">
-                                <i class="fa fa-cogs text-primary mr-1"></i>
-                                <span>AUTO</span>
-                            </div>
-                            <div class="px-2">
-                                <i class="fa fa-road text-primary mr-1"></i>
-                                <span>25K</span>
-                            </div>
-                        </div>
+                        <img class="img-fluid mb-4" src="{{Storage::url($rs->image)}}" alt="" style="width: 100%; height: 200px; object-fit: cover;" >
+                        <h4 class="text-uppercase mb-4">{{$rs->title}}</h4>
+
                         <a class="btn btn-primary px-3" href="{{route('blogdetail',['id'=>$rs->id])}}">Read</a>
                     </div>
                 </div>

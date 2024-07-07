@@ -112,7 +112,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('admin.faq.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="nav-icon fas fa-question"></i>
                         <p>
                             FAQ
                             <span class="right badge badge-danger"></span>
